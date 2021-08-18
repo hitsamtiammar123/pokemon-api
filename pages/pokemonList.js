@@ -19,16 +19,6 @@ module.exports = async function(req, res, next){
       r.height = pResponse.height;
       r.species = pResponse.species.name;
       r.weight = pResponse.weight;
-      r.stats = pResponse.stats.reduce((p, c) => {
-        return {
-          ...p,
-          [c.stat.name]: c.base_stat
-        }
-      },{});
-      
-      // pResponse.stats.forEach(stat => {
-      //   r[stat.stat.name] = stat.base_stat;
-      // });
 
       r.img = pResponse.sprites.other['official-artwork'].front_default;
       list.push(r);
