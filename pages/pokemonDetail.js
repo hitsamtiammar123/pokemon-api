@@ -2,7 +2,7 @@ const pokedex = require('./pokedex');
 
 module.exports = async function(req, res, next){
   try{
-    const response = await pokedex.getPokemonByName(req.body.name);
+    const response = await pokedex.getPokemonByName(req.query.name);
     const result = {};
 
     result.id = response.id;
@@ -15,6 +15,7 @@ module.exports = async function(req, res, next){
     result.moves = response.moves.map(move => move.move.name);
     result.img = response.sprites.other['official-artwork'].front_default;
     result.types = response.types.map(type => type.type.name);
+    result.weight = response.weight;
     result.stats = response.stats.reduce((p, c) => {
       return {
         ...p,

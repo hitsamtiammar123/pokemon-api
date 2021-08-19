@@ -2,10 +2,9 @@ const pokedex = require('./pokedex');
 
 module.exports = async function(req, res, next){
   try{
-    console.log(req.body);
     const response = await pokedex.getPokemonsList({
-      limit: req.body.limit || 10,
-      offset: req.body.offset || 0
+      limit: Number(req.query.limit) || 10,
+      offset: Number(req.query.offset) || 0
     });
     const list = [];
     for(let i = 0; i < response.results.length; i++){
@@ -15,7 +14,7 @@ module.exports = async function(req, res, next){
       
       r.id = pResponse.id;
       r.name = pokemon.name;
-      r.exp = pResponse.base_experience;
+      r.base_experience = pResponse.base_experience;
       r.height = pResponse.height;
       r.species = pResponse.species.name;
       r.weight = pResponse.weight;
