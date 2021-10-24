@@ -18,6 +18,7 @@ module.exports = async function(req, res, next){
       r.height = pResponse.height;
       r.species = pResponse.species.name;
       r.weight = pResponse.weight;
+      r.types = pResponse.types.map(type => type.type.name);
 
       r.img = pResponse.sprites.other['official-artwork'].front_default;
       list.push(r);
